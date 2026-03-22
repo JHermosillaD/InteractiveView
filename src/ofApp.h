@@ -2,33 +2,26 @@
 #include "ofMain.h"
 #include "ofxMediaPipeHandTracker.h"
 #include "V4L2CameraSettings.h"
+#include "HandCameraController.h"
+#include "LandmarkSmoother.h"
 
 class ofApp : public ofBaseApp {
-	public:
-		void setup();
-		void update();
-		void draw();
-		void exit() override;
+    public:
+        void setup() override;
+        void update() override;
+        void draw() override;
+        void exit() override;
+        void keyPressed(int key) override;
 
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y);
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
+        // Hand tracker
+        ofEasyCam            cam;
+        HandCameraController handCam;
+        LandmarkSmoother     smoother;
 
-		void drawInteractionArea();
-		bool bHelpText;
-		ofEasyCam cam;
-
-	    V4L2CameraSettings camSettings;
-		ofVideoGrabber mGrabber;
-		ofPixels mVideoPixels;
-		ofTexture mVideoTexture;
-		ofFpsCounter mVideoFps;
-		std::shared_ptr<ofx::MediaPipe::HandTracker> handTracker;
-
+        // Camera settings
+        std::shared_ptr<ofx::MediaPipe::HandTracker> handTracker;
+        V4L2CameraSettings camSettings;
+        ofVideoGrabber     mGrabber;
+        ofPixels           mVideoPixels;
+        ofTexture          mVideoTexture;
 };
