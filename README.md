@@ -38,12 +38,15 @@ Releasing the claw gesture initiates a `LOCKED` state to prevent jitter before r
 ### Theoretical Background
 
 To reduce jitter the project implements a **3D One Euro Filter**. The smoothing factor $\alpha$ is calculated per-frame from the time delta $\Delta t$ and cutoff frequency $f_c$:
+
 $$\tau = \frac{1}{2\pi f_c}, \qquad \alpha = \frac{1}{1 + \frac{\tau}{\Delta t}}$$
 
 The filtered position is updated as:
+
 $$\mathbf{X}_i = \alpha \, \mathbf{x}_i + (1 - \alpha)\, \mathbf{X}_{i-1}$$
 
 The adaptive cutoff uses a filtered estimate of the velocity magnitude. Raw velocity is first smoothed with a fixed derivative cutoff $f_d$:
+
 $$\dot{\mathbf{X}}_i = \alpha_d \cdot \frac{\mathbf{x}_i - \mathbf{X}_{i-1}}{\Delta t} + (1 - \alpha_d)\cdot \dot{\mathbf{X}}_{i-1}$$
 
 The cutoff then scales with the 3D speed, controlled by $\beta$:
@@ -54,7 +57,9 @@ Then, the raw hand joint coordinates are translated into smooth camera movements
 
   **1. Basis Vector Construction**
 
-An orthonormal basis is built from: Wrist $\mathbf{w}$, Index MCP $\mathbf{p}_R$, Middle MCP $\mathbf{p}_{mid}$, and Pinky MCP $\mathbf{p}_L$ landmarks.
+An orthonormal basis is built from the landmarks: 
+
+$$\text{Wrist} \mathbf{w}, \text{Index MCP} \mathbf{p}_R, \text{Middle MCP} \mathbf{p}_{mid}, \text{and Pinky MCP} \mathbf{p}_L$$
 
 The palm normal is estimated as:
 
