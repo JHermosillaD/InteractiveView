@@ -8,6 +8,8 @@
 
 A real-time interactive 3D camera controller demo built with openFrameworks and MediaPipe.
 
+<video width="1280" height="720" src="https://github.com/user-attachments/assets/3ba75aef-8c2e-47d5-8d90-4ec510e743bd.mp4"></video>
+
 ### Project Structure
 ```text
 ├── src/
