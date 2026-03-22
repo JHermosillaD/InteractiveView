@@ -55,7 +55,8 @@ void ofApp::draw(){
     ofEnableDepthTest();
     ofDrawGrid(20, 10, false, true, true, true);
 
-    if (handCam.getMode() == HandCameraController::Mode::TWO_HANDS) {
+    if (handCam.getMode() == HandCameraController::Mode::TWO_HANDS || 
+        handCam.getMode() == HandCameraController::Mode::LOCKED) {
         ofPushStyle();
         ofNoFill();
         ofSetLineWidth(2);
